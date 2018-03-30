@@ -1,0 +1,7 @@
+.todo-delete {
+    color: red;
+    float: right;
+}
+.todo-delete:hover {
+    cursor: pointer;
+}
