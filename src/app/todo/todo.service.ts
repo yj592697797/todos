@@ -3,6 +3,8 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { UUID } from 'angular2-uuid';
 import { Todo } from './todo.model';
+import { Observable } from 'rxjs/Observable';
+import { map } from "rxjs/operators/map";
 
 @Injectable()
 export class TodoService {
@@ -25,12 +27,15 @@ export class TodoService {
       .catch(this.handleError)
   }
 
-  getAll(): Promise<Todo[]> {
+  getAll(): Observable<Todo[]> {
     return this.http
       .get(this.api_url, { headers: this.headers })
-      .toPromise()
-      .then(res => res.json() as Todo[])
-      .catch(this.handleError);
+      .pipe(
+        map(res => res.json())
+      );
+      // .toPromise()
+      // .then(res => res.json() as Todo[])
+      // .catch(this.handleError);
   }
 
   delete(id: string): Promise<void> {

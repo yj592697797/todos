@@ -29,7 +29,10 @@ export class TodoComponent implements OnInit {
 
   getAll(): void{
     this.todoService.getAll()
-      .then(todos => this.todos = [...todos]);
+      .subscribe({
+        next: todos => this.todos = [...todos]
+      });
+      // .then(todos => this.todos = [...todos]);
   }
 
   delete(id: string): void {
